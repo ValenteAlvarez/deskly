@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from app.models.ticket import Priority, State
 
@@ -11,6 +11,8 @@ class TicketCreate(BaseModel):
 	assigned_to: str | None = None
 
 class TicketUpdate(BaseModel):
+	model_config = ConfigDict(extra='forbid')
+	
 	title: str | None = None
 	description: str | None = None
 	priority: Priority | None = None

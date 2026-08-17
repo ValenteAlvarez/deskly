@@ -1,7 +1,9 @@
+
+
 from fastapi import APIRouter, HTTPException
 
 from app.models.ticket import Priority, Ticket
-from app.schemas.ticket import TicketCreate, TicketRead
+from app.schemas.ticket import TicketCreate, TicketRead, TicketUpdate
 
 router = APIRouter(prefix='/api')
 
@@ -50,9 +52,9 @@ async def get_tickets(page: int = 0, priority: Priority | None = None ) -> list[
 	print(tickets)
 	return tickets
 
-@router.get('/tickets/{ticketId}', response_model=TicketRead)
-async def get_ticket(ticketId):
-	ticket = await Ticket.get(ticketId)
+@router.get('/tickets/{ticket_id}', response_model=TicketRead)
+async def get_ticket(ticket_id):
+	ticket = await Ticket.get(ticket_id)
 	if (ticket is None):
 		raise HTTPException(status_code=404, detail="Ticket not found")
 
@@ -66,4 +68,27 @@ async def get_ticket(ticketId):
 		created_at=ticket.created_at,
 		updated_at=ticket.updated_at,
 		comments=ticket.comments,
+	)
+
+@router.patch('/tickets/{ticket_id}', response_model=TicketRead)
+async def patch_ticket(ticket_id, update: TicketUpdate):
+	ticket = await Ticket.get(ticket_id)
+	if (ticket is None):
+		raise HTTPException(status_code=404, detail='Ticket not found')
+	
+	sanitized_update = update.model_dump(exclude_unset=True)
+	print(sanitized_update)
+
+	updated_ticket = await ticket.update({"$set": sanitized_update})
+
+	return TicketRead(
+		id=str(updated_ticket.id),
+		title=updated_ticket.title,
+		description=updated_ticket.description,
+		priority=updated_ticket.priority,
+		state=updated_ticket.state,
+		assigned_to=updated_ticket.assigned_to,
+		created_at=updated_ticket.created_at,
+		updated_at=updated_ticket.updated_at,
+		comments=updated_ticket.comments,
 	)
