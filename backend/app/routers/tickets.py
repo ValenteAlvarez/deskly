@@ -5,9 +5,9 @@ from fastapi import APIRouter, HTTPException
 from app.models.ticket import Priority, Ticket
 from app.schemas.ticket import TicketCreate, TicketRead, TicketUpdate
 
-router = APIRouter(prefix='/api')
+router = APIRouter()
 
-@router.post('/tickets', response_model=TicketRead)
+@router.post('/', response_model=TicketRead)
 async def create_ticket(payload: TicketCreate):
 	new_ticket = Ticket(
 		title=payload.title, 
@@ -29,7 +29,7 @@ async def create_ticket(payload: TicketCreate):
         comments=new_ticket.comments,
     )
 
-@router.get('/tickets', response_model=list[TicketRead])
+@router.get('/', response_model=list[TicketRead])
 async def get_tickets(page: int = 0, priority: Priority | None = None ) -> list[TicketRead]:
 	limit = 5 # Para mostrar pagination mas facil
 	tickets = []
@@ -52,7 +52,7 @@ async def get_tickets(page: int = 0, priority: Priority | None = None ) -> list[
 	print(tickets)
 	return tickets
 
-@router.get('/tickets/{ticket_id}', response_model=TicketRead)
+@router.get('/{ticket_id}', response_model=TicketRead)
 async def get_ticket(ticket_id):
 	ticket = await Ticket.get(ticket_id)
 	if (ticket is None):
@@ -70,7 +70,7 @@ async def get_ticket(ticket_id):
 		comments=ticket.comments,
 	)
 
-@router.patch('/tickets/{ticket_id}', response_model=TicketRead)
+@router.patch('/{ticket_id}', response_model=TicketRead)
 async def patch_ticket(ticket_id, update: TicketUpdate):
 	ticket = await Ticket.get(ticket_id)
 	if (ticket is None):
