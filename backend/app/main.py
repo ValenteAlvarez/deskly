@@ -6,7 +6,7 @@ from pymongo import AsyncMongoClient
 
 from app.config import settings
 from app.models.ticket import Ticket
-from app.routers import comments, tickets
+from app.routers import comments, status, tickets
 
 
 @asynccontextmanager
@@ -17,4 +17,5 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Deskly Ticket API", lifespan=lifespan)
 app.include_router(tickets.router, prefix="/api/tickets", tags=["tickets"])
-app.include_router(comments.router, prefix="/api/tickets/{ticket_id}/comments", tags=["comments"])
+app.include_router(comments.router, prefix="/api/tickets/{ticket_id}/comentarios", tags=["comments"])
+app.include_router(status.router, prefix="/api/tickets/{ticket_id}/transicion", tags=["status"])

@@ -1,4 +1,4 @@
-from beanie import Document, Replace, Update, before_event
+from beanie import Document, Replace, Save, Update, before_event
 from datetime import datetime, timezone
 from enum import Enum
 
@@ -30,7 +30,7 @@ class Ticket(Document):
 	updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 	comments: list[str] = Field(default_factory=list)
 
-	@before_event(Replace, Update)
+	@before_event(Replace, Update, Save)
 	def set_updated_at(self):
 		self.updated_at = datetime.now(timezone.utc)
 
