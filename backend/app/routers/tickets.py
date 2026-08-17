@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from app.models.ticket import Priority, Ticket
 from app.schemas.ticket import TicketCreate, TicketRead
@@ -49,3 +49,21 @@ async def get_tickets(page: int = 0, priority: Priority | None = None ) -> list[
 		))
 	print(tickets)
 	return tickets
+
+@router.get('/tickets/{ticketId}', response_model=TicketRead)
+async def get_ticket(ticketId):
+	ticket = await Ticket.get(ticketId)
+	if (ticket is None):
+		raise HTTPException(status_code=404, detail="Ticket not found")
+
+	return TicketRead(
+		id=str(ticket.id),
+		title=ticket.title,
+		description=ticket.description,
+		priority=ticket.priority,
+		state=ticket.state,
+		assigned_to=ticket.assigned_to,
+		created_at=ticket.created_at,
+		updated_at=ticket.updated_at,
+		comments=ticket.comments,
+	)
