@@ -1,0 +1,176 @@
+@use '@/app/variables.scss' as vars;
+
+@keyframes appear {
+	from {
+		visibility: hidden;
+		pointer-events: none;
+		opacity: 0;
+		transform: translate3d(0, -10px, 0);
+	}
+
+	to {
+		visibility: visible;
+		pointer-events: all;
+		transform: translate3d(0, 0px, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes disappear {
+	from {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: all;
+	}
+
+	to {
+		visibility: hidden;
+		pointer-events: none;
+		opacity: 0;
+	}
+}
+
+.dropdown-wrapper {
+	position: relative;
+
+	.dropdown-overlay {
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		inset: 0;
+		z-index: 10;
+		cursor: default;
+	}
+
+	.dropdown-button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid var(--dropdown-border-color);
+		background-color: var(--dropdown-background-color);
+		border-radius: var(--dropdown-border-radius);
+		padding: vars.$pd-1;
+		color: var(--dropdown-primary-color);
+		flex: 1;
+		width: 100%;
+
+		&.disabled {
+			opacity: 0.5;
+			cursor: default;
+		}
+
+		.dropdown-button-title {
+			font-weight: bold;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: vars.$pd-1;
+			color: var(--title-color);
+
+			&:has(+ .dropdown-button-selection) {
+				padding-right: vars.$pd-1;
+			}
+		}
+
+		.dropdown-button-selection {
+			&:has(+ .dropdown-button-title) {
+				padding-left: vars.$pd-1;
+			}
+
+			border-left: 1px solid var(--dropdown-secondary-color);
+		}
+	}
+
+	.submenu-wrapper {
+		box-sizing: border-box;
+		border: 1px solid var(--dropdown-border-color);
+		background-color: var(--dropdown-background-color);
+		border-radius: var(--dropdown-border-radius);
+		padding: vars.$pd-1;
+		position: absolute;
+		overflow: hidden;
+		z-index: 100;
+		width: max-content;
+		transform-origin: top left;
+		animation: 'disappear' 0.1s ease-out;
+		visibility: hidden;
+		pointer-events: none;
+		min-width: 100%;
+
+		&.open {
+			visibility: visible;
+			pointer-events: all;
+			animation: 'appear' 0.1s ease-out;
+			visibility: visible;
+			pointer-events: all;
+		}
+
+		.dropdown-section {
+			&:not(:first-child) {
+				border-top: 1px solid var(--dropdown-secondary-color);
+				margin-top: vars.$pd-1;
+				padding: vars.$pd-1 0 calc(vars.$pd-1 / 2) 0;
+			}
+
+			.dropdown-section-header {
+				color: var(--dropdown-secondary-color);
+			}
+
+		}
+
+		.dropdown-item {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			cursor: pointer;
+			padding: vars.$pd-1;
+			margin: 2px 0;
+			border-radius: calc(var(--dropdown-border-radius) / 2);
+			gap: 8px;
+			color: var(--dropdown-primary-color);
+			transition: background-color 0.2s ease-out;
+
+
+			&.selected {
+				background-color: var(--dropdown-selected-color);
+				position: relative;
+
+				&::after {
+					content: '';
+					position: absolute;
+					right: vars.$pd-1;
+					// justify-self: flex-end;
+					width: 6px;
+					height: 6px;
+					border-radius: 100%;
+					background-color: var(--dropdown-secondary-color);
+				}
+			}
+
+			&:hover {
+				background-color: var(--dropdown-hover-color);
+			}
+		}
+
+		.dropdown-action-item {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			cursor: pointer;
+			padding: vars.$pd-1;
+			margin: 2px 0;
+			border-radius: calc(var(--dropdown-border-radius) / 2);
+			gap: 8px;
+			color: var(--dropdown-primary-color);
+			background-color: var(--dropdown-secondary-color);
+
+			&:hover {
+				filter: brightness(0.9);
+			}
+
+			&:active {
+				filter: brightness(0.6);
+			}
+		}
+	}
+}

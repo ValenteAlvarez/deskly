@@ -1,0 +1,18 @@
+.ticket-card {
+	max-width: 230;
+	padding: 24 32 !important;
+
+	.ticket-card-title {
+		text-align: start;
+		margin: 0;
+	}
+
+	.ticket-card-assigned-to {
+		text-align: center;
+		text-decoration: underline;
+	}
+
+	p {
+		margin: 0;
+	}
+}
