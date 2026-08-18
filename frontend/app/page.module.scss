@@ -1,0 +1,15 @@
+@use '../components/variables.scss';
+
+.wrapper {
+	position: relative;
+	padding: 0;
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+	grid-template-columns: 120px 1fr;
+
+	.main-content {
+		padding: calc(var(--padding-l) * 3);
+		padding-top: calc(var(--padding-l) * 5);
+	}
+}

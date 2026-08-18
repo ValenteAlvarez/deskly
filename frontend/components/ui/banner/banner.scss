@@ -1,0 +1,8 @@
+@use '../../variables.scss';
+
+.state-label {
+	color: white;
+	padding: var(--padding-s) var(--padding-m);
+	border-radius: var(--border-radius-m);
+	background-color: var(--state-color);
+}

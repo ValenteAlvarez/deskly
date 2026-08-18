@@ -1,8 +1,6 @@
-@use '@/app/variables.scss' as vars;
-
 .navigate-button {
 	padding: 20px 30px;
-	background-color: vars.$clear-glass;
+	background-color: rgb(55, 125, 237);
 	object-fit: fill;
 	transition: background-color 0.2s ease-out;
 	color: white;
@@ -21,10 +19,9 @@
 
 .link-button {
 	padding: 10px 10px;
-	background-color: vars.$clear-glass;
+	background-color: white;
 	object-fit: fill;
 	transition: background-color 0.2s ease-out;
-	color: white;
 	cursor: pointer;
 	border-radius: 5px;
 	display: flex;
@@ -32,6 +29,7 @@
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
+	text-decoration: none;
 
 	span {
 		font-size: 1.1rem;

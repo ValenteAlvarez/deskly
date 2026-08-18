@@ -1,0 +1,9 @@
+.grid-view-wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	overflow-y: scroll;
+	max-height: 100%;
+	justify-content: start;
+	align-items: start;
+	gap: 24px;
+}

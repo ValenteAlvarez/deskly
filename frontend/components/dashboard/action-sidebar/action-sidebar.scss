@@ -1,0 +1,39 @@
+.action-sidebar {
+	background-color: var(--v-blue);
+	padding: var(--padding-l) var(--padding-m);
+	height: 100%;
+
+	.action-sidebar-create-button {
+		background-color: var(--v-blue-dark);
+		color: white;
+		font-weight: bold;
+		border: none;
+		padding: 16 32;
+
+		span {
+			color: white;
+		}
+	}
+
+	.action-sidebar-filter-title {
+		font-size: 1rem;
+		color: white;
+	}
+
+	.action-sidebar-filter-options {
+		a {
+			background-color: #ffffffab;
+		}
+
+		a:has(.active) {
+			background-color: #ffffff;
+
+		}
+
+		.action-sidebar-filter-option {
+			text-decoration: none;
+			color: var(--v-blue);
+		}
+	}
+
+}

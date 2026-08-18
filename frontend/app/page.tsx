@@ -1,5 +1,8 @@
-import TicketCard from "@/components/tickets/ticket-card/ticket-card";
+import styles from './page.module.scss'
 import { TicketRead } from "@/lib/types";
+import ActionSidebar from "@/components/dashboard/action-sidebar/action-sidebar";
+import GridView from '@/components/dashboard/gird-view/grid-view';
+import DashboardHeader from '@/components/dashboard/header/header';
 
 const testTicket: TicketRead  = {
 	id: "12341234",
@@ -15,10 +18,12 @@ const testTicket: TicketRead  = {
 
 export default function Home() {
   return (
-    <div className={`main-wrapper`}>
-      <main>
-		<TicketCard ticket={testTicket}/>
-      </main>
-    </div>
+      <div className={styles['wrapper']}>
+		<ActionSidebar/>
+		<main className={styles['main-content']}>
+			<DashboardHeader/>
+			<GridView tickets={[testTicket]}/>
+		</main>
+      </div>
   );
 }

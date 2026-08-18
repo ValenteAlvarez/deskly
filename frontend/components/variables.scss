@@ -1,4 +1,5 @@
 :root {
+	padding: 0;
 	--padding-s: 4px;
 	--padding-m: 8px;
 	--padding-l: 12px;
@@ -6,4 +7,12 @@
 	--border-radius-s: 4px;
 	--border-radius-m: 16px;
 	--border-radius-l: 24px;
+
+	--v-blue: rgb(58, 156, 214);
+	--v-blue-dark: rgb(30, 68, 143);
+}
+
+body {
+	padding: 0;
+	margin: 0;
 }

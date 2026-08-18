@@ -67,7 +67,7 @@ export function TextButton({
 			}}
 		>
 			{icon ? <Image src={icon} alt={''} width={20} height={20}/> : ''}
-			{children}
+			<span>{children}</span>
 		</button>
 	)
 }

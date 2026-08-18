@@ -1,8 +1,9 @@
 import { Card } from "@/components/ui/card/card";
 import { HStack, VStack } from "@/components/ui/stacks/stacks";
-import StateLabel from "@/components/ui/state-label/state-label";
+import StateLabel from "@/components/tickets/state-label/state-label";
 import { TicketRead } from "@/lib/types";
 import './ticket-card.scss';
+import Banner from "@/components/ui/banner/banner";
 
 type TicketCardProps = {
 	ticket: TicketRead
@@ -32,7 +33,9 @@ export default function TicketCard({ ticket }: TicketCardProps) {
 					<StateLabel state={ticket.state}/>
 				</HStack>
 				<p className="ticket-card-description">{ticket.description.length <= descriptionMaxLength ? ticket.description : ticket.description.substring(0, descriptionMaxLength)}...</p>
-				<p style={{color: priorityColor}}>Priority: {ticket.priority}</p>
+				<Banner tone={"info"}>
+					<p>Priority: {ticket.priority}</p>
+				</Banner>
 				<p className="ticket-card-assigned-to">{ticket.assigned_to ? `Assigned: ${ticket.assigned_to}` : 'Unassigned'}</p>
 			</VStack>
 		</Card>
