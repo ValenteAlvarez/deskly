@@ -50,7 +50,8 @@ async def get_tickets(page: int = 1, take: int = 5, priority: Priority | None = 
 		filter = Ticket.priority == priority
 
 	count = await Ticket.find(filter).count()
-	total_pages = ceil(count / take)
+
+	total_pages = max(ceil(count / take), 1) if take > 0 else 1
 
 	if page > total_pages:
 		page = total_pages

@@ -29,7 +29,8 @@ export default function GridView({  }) {
 	return (
 	<div className='grid-view-wrapper'>
 		<article className={'grid-view-cards-container'}>
-			{data?.tickets.map((ticket) => <TicketCard key={ticket.id} ticket={ticket}/>)}
+			{data.ticket_count > 0 && data?.tickets.map((ticket) => <TicketCard key={ticket.id} ticket={ticket}/>)}
+			{data.ticket_count === 0 && <h1>No tickets. Create your first one!</h1>}
 		</article>
 		{data!.total_pages > 1 &&
 		<PageSelector 

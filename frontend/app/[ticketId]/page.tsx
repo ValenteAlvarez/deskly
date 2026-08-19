@@ -6,7 +6,7 @@ type TicketDetailsProps = {
 }
 export default async function TicketDetailsPage({ params }: TicketDetailsProps) {
 	const { ticketId } = await params;
-	const API_URL = process.env.NEXT_PUBLIC_API_URL;
+	const API_URL = process.env.API_URL;
 	const ticket: TicketRead = await (await fetch(`${API_URL}/tickets/${ticketId}`)).json();
 	console.log('Hello from the server!');
 	return (

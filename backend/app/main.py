@@ -14,7 +14,7 @@ from app.routers import comments, status, tickets, webhooks, ws
 @asynccontextmanager
 async def lifespan(app: FastAPI):
 	client = AsyncMongoClient(settings.mongo_uri)
-	await init_beanie(database=client.get_default_database(), document_models=[Ticket])
+	await init_beanie(database=client[settings.db_name], document_models=[Ticket])
 	yield
 
 app = FastAPI(title="Deskly Ticket API", lifespan=lifespan)

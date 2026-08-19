@@ -3,6 +3,8 @@ import ActionSidebar from "@/components/dashboard/action-sidebar/action-sidebar"
 import GridView from '@/components/dashboard/gird-view/grid-view';
 import DashboardHeader from '@/components/dashboard/header/header';
 
+export const dynamic = "force-dynamic"
+
 export default function Home({}) {
 	return (
       <div className={styles['wrapper']}>
