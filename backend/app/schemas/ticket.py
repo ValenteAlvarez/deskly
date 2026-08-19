@@ -28,3 +28,8 @@ class TicketRead(BaseModel):
 	created_at: datetime
 	updated_at: datetime
 	comments: list[str]
+
+class PaginatedTickets(BaseModel):
+	tickets: list[TicketRead]
+	ticket_count: int
+	total_pages: int

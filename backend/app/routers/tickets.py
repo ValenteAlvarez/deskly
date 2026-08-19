@@ -1,9 +1,11 @@
 
 
+from math import ceil
+
 from fastapi import APIRouter, HTTPException
 
 from app.models.ticket import Priority, Ticket
-from app.schemas.ticket import TicketCreate, TicketRead, TicketUpdate
+from app.schemas.ticket import PaginatedTickets, TicketCreate, TicketRead, TicketUpdate
 
 router = APIRouter()
 
@@ -29,15 +31,25 @@ async def create_ticket(payload: TicketCreate):
         comments=new_ticket.comments,
     )
 
-@router.get('/', response_model=list[TicketRead])
-async def get_tickets(page: int = 0, priority: Priority | None = None ) -> list[TicketRead]:
-	limit = 5 # Para mostrar pagination mas facil
+@router.get('/', response_model=PaginatedTickets)
+async def get_tickets(page: int = 1, take: int = 5, priority: Priority | None = None ) -> PaginatedTickets:
 	tickets = []
 	filter = {}
 	if priority is not None:
 		filter = Ticket.priority == priority
+
+	count = await Ticket.find(filter).count()
+	total_pages = ceil(count / take)
+
+	if page > total_pages:
+		page = total_pages
 	
-	async for ticket in Ticket.find(filter).skip(page * limit).limit(limit):
+	computed_skip = (page - 1) * take
+
+
+	print(computed_skip)
+
+	async for ticket in Ticket.find(filter).skip(computed_skip).limit(take):
 		tickets.append(TicketRead(
 			id=str(ticket.id),
 			title=ticket.title,
@@ -50,7 +62,7 @@ async def get_tickets(page: int = 0, priority: Priority | None = None ) -> list[
 			updated_at=ticket.updated_at
 		))
 	print(tickets)
-	return tickets
+	return PaginatedTickets(tickets=tickets, ticket_count=count, total_pages=total_pages)
 
 @router.get('/{ticket_id}', response_model=TicketRead)
 async def get_ticket(ticket_id):
@@ -77,7 +89,6 @@ async def patch_ticket(ticket_id, update: TicketUpdate):
 		raise HTTPException(status_code=404, detail='Ticket not found')
 	
 	sanitized_update = update.model_dump(exclude_unset=True)
-	print(sanitized_update)
 
 	updated_ticket = await ticket.update({"$set": sanitized_update})
 

@@ -88,6 +88,15 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** PaginatedTickets */
+        PaginatedTickets: {
+            /** Tickets */
+            tickets: components["schemas"]["TicketRead"][];
+            /** Ticket Count */
+            ticket_count: number;
+            /** Total Pages */
+            total_pages: number;
+        };
         /**
          * Priority
          * @enum {string}
@@ -173,6 +182,7 @@ export interface operations {
         parameters: {
             query?: {
                 page?: number;
+                take?: number;
                 priority?: components["schemas"]["Priority"] | null;
             };
             header?: never;
@@ -187,7 +197,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TicketRead"][];
+                    "application/json": components["schemas"]["PaginatedTickets"];
                 };
             };
             /** @description Validation Error */
