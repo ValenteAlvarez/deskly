@@ -25,7 +25,7 @@ export default function ActionSidebar() {
 
 		<FilterSelector />		
 		{isCreateModalOpen && <Modal handleClose={() => setIsCreateModalOpen(false)}>
-			<CreateTicketForm />
+			<CreateTicketForm handleClose={() => setIsCreateModalOpen(false)}/>
 		</Modal>}
 	</VStack>)
 }

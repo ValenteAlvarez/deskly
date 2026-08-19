@@ -22,13 +22,9 @@ export default function GridView({  }) {
 		return <h1>Loading...</h1>
 	}
 
-	if (isError) {
-		<h1>Error fetching tickets</h1>
+	if (isError || !data) {
+		return <h1>Error fetching tickets</h1>
 	}
-
-	if (!data) return;
-
-	console.log('path', path);
 
 	return (
 	<div className='grid-view-wrapper'>

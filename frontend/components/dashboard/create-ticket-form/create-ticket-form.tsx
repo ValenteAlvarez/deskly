@@ -1,8 +1,13 @@
 import SimpleForm from "@/components/ui/simple-form/simple-form";
+import { useTicketCreateMutation } from "@/lib/hooks/useMutations";
 import { TicketCreate, TicketPriority } from "@/lib/types";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-export default function CreateTicketForm({}) {
+type CreateTicketFormProps = {
+	handleClose: () => void
+}
+export default function CreateTicketForm({handleClose}: CreateTicketFormProps) {
 	const [newTicketData, setNewTicketData] = useState<TicketCreate>({
 		title: '',
 		description: '',
@@ -10,6 +15,9 @@ export default function CreateTicketForm({}) {
 		priority: 'low'
 	});
 	const [submitError, setSubmitError] = useState(false);
+	const queryClient = useQueryClient();
+
+	const createTicket = useTicketCreateMutation();
 
 	function isFormValid() {
 		console.log('Ticket data', newTicketData);
@@ -20,13 +28,18 @@ export default function CreateTicketForm({}) {
 		return true;
 	}
 
-	function handleSubmit() {
+	async function handleSubmit() {
 		if (!isFormValid()) {
 			setSubmitError(true);
 			setTimeout(() => setSubmitError(false), 4000);
 		}
 
-		console.log('Will submit');
+		const response = await createTicket.mutateAsync(newTicketData);
+		if (response.ok) {
+			queryClient.invalidateQueries({queryKey: ['dashboard']});
+			handleClose();
+		}
+		else alert('There was an issue adding the new ticket');
 	}
 	return (
 	<SimpleForm<TicketCreate> 

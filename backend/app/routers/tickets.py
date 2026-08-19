@@ -11,6 +11,7 @@ router = APIRouter()
 
 @router.post('/', response_model=TicketRead)
 async def create_ticket(payload: TicketCreate):
+	print('Received:', payload)
 	new_ticket = Ticket(
 		title=payload.title, 
 		description=payload.description, 
@@ -35,9 +36,7 @@ async def create_ticket(payload: TicketCreate):
 async def get_tickets(page: int = 1, take: int = 5, priority: Priority | None = None ) -> PaginatedTickets:
 	tickets = []
 	filter = {}
-	print("Priority:", priority)
 	if priority is not None:
-		print('Priority filter active')
 		filter = Ticket.priority == priority
 
 	count = await Ticket.find(filter).count()
