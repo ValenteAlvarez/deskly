@@ -16,8 +16,10 @@ const testTicket: TicketRead  = {
 	comments: []
 }
 
+
+
 export default function Home() {
-  return (
+	return (
       <div className={styles['wrapper']}>
 		<ActionSidebar/>
 		<main className={styles['main-content']}>
