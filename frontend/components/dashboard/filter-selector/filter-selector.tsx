@@ -14,7 +14,7 @@ export default function FilterSelector() {
 	<VStack horizontalAlign="stretch" gap={12} className="action-sidebar-filter-options">
 		<h1 className="action-sidebar-filter-title">Priority Filter</h1>
 
-		<LinkButton url={`${pathname}${searchParams ? `?${removeSearchParams(searchParams, 'priority')}` : ''}`}>
+		<LinkButton url={`${pathname}${searchParams ? `?${removeSearchParams(removeSearchParams(searchParams, 'page'), 'priority')}` : ''}`}>
 			<span className="action-sidebar-filter-option">All</span>
 		</LinkButton>
 		{filterOptions.map(option => (
