@@ -16,7 +16,7 @@ Dada la baja (practicamente nula) necesidad de relaciones complejas entre difere
 Decidi indexar el atributo de 'Prioridad', ya que en éste me base para la implementación del filtrado y es el atributo que más lecturas tendrá
 
 ## Tiempo real invertido
-~10 horas: aproximadamente entre una a dos horas diarias por 5 dias
+~10-15 horas: aproximadamente entre una a tres horas diarias por 5 dias
 
 ### Script para probar Webhook:
 ```
