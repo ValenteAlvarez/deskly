@@ -15,7 +15,8 @@ import DashboardHeader from '@/components/dashboard/header/header';
 // 	comments: []
 // }
 
-export default function Home() {
+
+export default function Home({}) {
 	return (
       <div className={styles['wrapper']}>
 		<ActionSidebar/>

@@ -35,7 +35,9 @@ async def create_ticket(payload: TicketCreate):
 async def get_tickets(page: int = 1, take: int = 5, priority: Priority | None = None ) -> PaginatedTickets:
 	tickets = []
 	filter = {}
+	print("Priority:", priority)
 	if priority is not None:
+		print('Priority filter active')
 		filter = Ticket.priority == priority
 
 	count = await Ticket.find(filter).count()
@@ -45,9 +47,6 @@ async def get_tickets(page: int = 1, take: int = 5, priority: Priority | None = 
 		page = total_pages
 	
 	computed_skip = (page - 1) * take
-
-
-	print(computed_skip)
 
 	async for ticket in Ticket.find(filter).skip(computed_skip).limit(take):
 		tickets.append(TicketRead(
@@ -61,7 +60,6 @@ async def get_tickets(page: int = 1, take: int = 5, priority: Priority | None = 
 			created_at=ticket.created_at,
 			updated_at=ticket.updated_at
 		))
-	print(tickets)
 	return PaginatedTickets(tickets=tickets, ticket_count=count, total_pages=total_pages)
 
 @router.get('/{ticket_id}', response_model=TicketRead)

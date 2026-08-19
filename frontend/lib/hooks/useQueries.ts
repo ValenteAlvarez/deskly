@@ -12,7 +12,7 @@ export function useDashboardQuery(page: number = 1, take?: number, priority?: Ti
 	if (take) params.append('take', take.toString());
 	if (priority) params.append('priority', priority);
 
-	console.log(params.toString());
+	console.log('Generated params:', params.toString());
 
 	return useQuery<PaginatedTickets>({
 		queryKey: ['dashboard', 'tickets', { page, priority }],
