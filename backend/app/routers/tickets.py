@@ -7,6 +7,8 @@ from fastapi import APIRouter, HTTPException
 from app.models.ticket import Priority, Ticket
 from app.schemas.ticket import PaginatedTickets, TicketCreate, TicketRead, TicketUpdate
 
+from app.lib.ws import manager
+
 router = APIRouter()
 
 @router.post('/', response_model=TicketRead)
@@ -18,6 +20,11 @@ async def create_ticket(payload: TicketCreate):
 		priority=payload.priority,
 		assigned_to=payload.assigned_to
 	)
+
+	await manager.broadcast({
+		"tipo": "ticket.creado",
+		"ticket": new_ticket.model_dump(mode="json")
+	})
 
 	await new_ticket.save()
 	return TicketRead(
@@ -88,6 +95,11 @@ async def patch_ticket(ticket_id, update: TicketUpdate):
 	sanitized_update = update.model_dump(exclude_unset=True)
 
 	updated_ticket = await ticket.update({"$set": sanitized_update})
+
+	await manager.broadcast({
+		"tipo": "ticket.actualizado",
+		"ticket": updated_ticket.model_dump(mode="json")
+	})
 
 	return TicketRead(
 		id=str(updated_ticket.id),

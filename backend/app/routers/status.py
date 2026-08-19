@@ -6,6 +6,7 @@ from app.lib.state_machine import can_transition
 from app.models.ticket import State, Ticket
 from app.schemas.ticket import TicketRead
 
+from app.lib.ws import manager
 
 router = APIRouter()
 
@@ -21,7 +22,12 @@ async def change_status(change_state: StatusChange, ticket: Ticket = Depends(che
 	
 	ticket.state = change_state.state
 	new_ticket = await ticket.save()
-	print(new_ticket)
+
+	await manager.broadcast({
+		"tipo": "ticket.actualizado",
+		"ticket": new_ticket.model_dump(mode="json")
+	})
+
 	return TicketRead(
 		id = str(new_ticket.id),
 		title = new_ticket.title,

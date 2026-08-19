@@ -26,19 +26,21 @@ export function useDashboardQuery(page: number = 1, take?: number, priority?: Ti
 	});
 }
 
-export function useTicketDetailsQuery(ticketId: string) {
-	const apiUrl = process.env.API_URL;
+export function useTicketDetailsQuery(ticket: TicketRead) {
+	const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+	console.log('apiUrl', apiUrl);
 	if (!apiUrl) throw new Error('API URL missing from .env');
 
 	return useQuery<TicketRead>({
-		queryKey: ['dashboard', { ticketId }],
+		queryKey: ['tickets', ticket.id],
 		queryFn: async () => {
-			const response = await fetch(`${apiUrl}/tickets/${ticketId}`);
+			const response = await fetch(`${apiUrl}/tickets/${ticket.id}`);
 			if (!response.ok) {
-				throw Error(`Error fetching ticket with ID: ${ticketId}`)
+				throw Error(`Error fetching ticket with ID: ${ticket.id}`)
 			}
 
 			return await response.json();
-		}
+		},
+		initialData: ticket
 	});
 }
