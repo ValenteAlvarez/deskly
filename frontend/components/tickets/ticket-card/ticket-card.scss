@@ -1,18 +1,23 @@
-.ticket-card {
-	height: auto;
-	padding: 24 32 !important;
+.ticket-card-wrapper {
 
-	.ticket-card-title {
-		text-align: start;
-		margin: 0;
-	}
+	.ticket-card {
+		height: auto;
+		padding: 24 32 !important;
+		height: 100%;
+		box-sizing: border-box;
 
-	.ticket-card-assigned-to {
-		text-align: center;
-		text-decoration: underline;
-	}
+		.ticket-card-title {
+			text-align: start;
+			margin: 0;
+		}
 
-	p {
-		margin: 0;
+		.ticket-card-assigned-to {
+			text-align: center;
+			text-decoration: underline;
+		}
+
+		p {
+			margin: 0;
+		}
 	}
 }

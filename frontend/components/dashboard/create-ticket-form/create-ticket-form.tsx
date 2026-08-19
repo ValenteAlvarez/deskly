@@ -20,9 +20,7 @@ export default function CreateTicketForm({handleClose}: CreateTicketFormProps) {
 	const createTicket = useTicketCreateMutation();
 
 	function isFormValid() {
-		console.log('Ticket data', newTicketData);
 		if (newTicketData.title === '' || newTicketData.description === '') {
-			console.log('Invalid');
 			return false;
 		}
 		return true;

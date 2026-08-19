@@ -17,7 +17,8 @@ export function useDashboardQuery(page: number = 1, take?: number, priority?: Ti
 		queryFn: async () => {
 			const response = await fetch(`${apiUrl}/tickets?${params.toString()}`);
 			if (!response.ok) {
-				// Handle whatever
+				throw Error(`Error fetching tickets`)
+
 			}
 
 			return await response.json();
@@ -34,7 +35,7 @@ export function useTicketDetailsQuery(ticketId: string) {
 		queryFn: async () => {
 			const response = await fetch(`${apiUrl}/tickets/${ticketId}`);
 			if (!response.ok) {
-				// Handle whatever
+				throw Error(`Error fetching ticket with ID: ${ticketId}`)
 			}
 
 			return await response.json();
