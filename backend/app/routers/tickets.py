@@ -2,12 +2,14 @@
 
 from math import ceil
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 
 from app.models.ticket import Priority, Ticket
 from app.schemas.ticket import PaginatedTickets, TicketCreate, TicketRead, TicketUpdate
 
 from app.lib.ws import manager
+
+from app.config import settings
 
 router = APIRouter()
 
@@ -20,13 +22,14 @@ async def create_ticket(payload: TicketCreate):
 		priority=payload.priority,
 		assigned_to=payload.assigned_to
 	)
+	
+	await new_ticket.save()
 
 	await manager.broadcast({
 		"tipo": "ticket.creado",
 		"ticket": new_ticket.model_dump(mode="json")
 	})
 
-	await new_ticket.save()
 	return TicketRead(
         id=str(new_ticket.id),
         title=new_ticket.title,
