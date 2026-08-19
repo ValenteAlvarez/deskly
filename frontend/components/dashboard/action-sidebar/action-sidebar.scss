@@ -1,14 +1,15 @@
 .action-sidebar {
 	background-color: var(--v-blue);
 	padding: var(--padding-l) var(--padding-m);
-	height: 100%;
+	max-height: 100vh;
 
 	.action-sidebar-create-button {
 		background-color: var(--v-blue-dark);
 		color: white;
 		font-weight: bold;
 		border: none;
-		padding: 16 32;
+		padding: var(--padding-s);
+		box-sizing: border-box;
 
 		span {
 			color: white;

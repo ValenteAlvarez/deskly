@@ -7,9 +7,14 @@
 	width: 100vw;
 	display: grid;
 	grid-template-columns: 120px 1fr;
+	overflow: hidden;
 
 	.main-content {
-		padding: calc(var(--padding-l) * 3);
-		padding-top: calc(var(--padding-l) * 5);
+		display: grid;
+		grid-template-rows: 100px 1fr;
+		height: 100vh;
+		position: relative;
+		// padding: calc(var(--padding-l) * 3);
+		// padding-top: calc(var(--padding-l) * 5);
 	}
 }

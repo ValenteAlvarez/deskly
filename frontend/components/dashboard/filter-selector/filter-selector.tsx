@@ -18,7 +18,7 @@ export default function FilterSelector() {
 			<span className="action-sidebar-filter-option">All</span>
 		</LinkButton>
 		{filterOptions.map(option => (
-		<LinkButton key={option} url={`${pathname + '?' + addSearchParam(searchParams, 'priority', option)}`}>
+		<LinkButton key={option} url={`${pathname + '?' + addSearchParam(removeSearchParams(searchParams, 'page'), 'priority', option)}`}>
 			<span className="action-sidebar-filter-option">{option}</span>
 		</LinkButton>)
 		)}

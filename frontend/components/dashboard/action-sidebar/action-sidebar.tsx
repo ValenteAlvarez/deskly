@@ -13,7 +13,7 @@ export default function ActionSidebar() {
 
 	return (
 	<VStack className="action-sidebar" gap={10} mainAlign="start">
-		<TextButton 
+		<TextButton
 			handleClick={() => setIsCreateModalOpen(true)} 
 			textColor={"var(--v-blue)"}
 			className="action-sidebar-create-button"

@@ -1,4 +1,6 @@
+import { TextButton } from "@/components/ui/button/buttons";
 import { HStack } from "@/components/ui/stacks/stacks";
+import './page-selector.scss'
 
 type PageSelectorProps = {
 	currentPage: number,
@@ -8,20 +10,20 @@ type PageSelectorProps = {
 export default function PageSelector({currentPage, totalPages, handlePageChange}: PageSelectorProps) {
 
 	return (
-	<HStack verticalAlign="center">
+	<HStack verticalAlign="center" gap={8} className="page-selector-wrapper">
 		{currentPage > 1 && 
-		<button onClick={(e) => {e.preventDefault(); handlePageChange(currentPage - 1)}}>
+		<TextButton backgroundColor={'var(--v-blue)'} textColor={'white'} handleClick={() => {handlePageChange(currentPage - 1)}}>
 			{'<'}
-		</button>}
+		</TextButton>}
 
 		<span className="page-selector-indicator">
 			{`${currentPage} of ${totalPages}`}
 		</span>
 
 		{currentPage < totalPages && 
-		<button onClick={(e) => {e.preventDefault(); handlePageChange(currentPage + 1)}}>
+		<TextButton backgroundColor={'var(--v-blue)'} textColor={'white'} handleClick={() => {handlePageChange(currentPage + 1)}}>
 			{'>'}
-		</button>}
+		</TextButton>}
 	</HStack>	
 	)
 }

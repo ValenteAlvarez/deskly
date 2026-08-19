@@ -42,7 +42,7 @@
 
 .text-button {
 	cursor: pointer;
-	padding: 20px 30px;
+	padding: var(--padding-s) var(--padding-m);
 	object-fit: fill;
 	transition: background-color 0.2s ease-out;
 	border-radius: 5px;
