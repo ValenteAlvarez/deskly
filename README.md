@@ -4,8 +4,10 @@
 Al no usar secretos ni datos sensibles, se puede clonar directamente los .env.example a archivos .env.local, por lo que solo es necesario correr los comandos de las instrucciones:
 
 ```
-bash git clone
-<tu-repo> cd <repo> cp .env.example .env docker compose up --build
+git clone https://github.com/ValenteAlvarez/deskly.git &&
+cd <directorio> &&
+cp .env.example .env &&
+docker compose up --build
 ```
 
 ## Base de datos
