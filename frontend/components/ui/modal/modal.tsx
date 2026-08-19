@@ -1,6 +1,6 @@
 'use client'
 import { CSSProperties, MouseEvent } from 'react';
-import './fullscreen-modal.scss';
+import './modal.scss'
 
 type FullscreenModalProps = {
 	handleClose: () => void

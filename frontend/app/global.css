@@ -1,8 +1,34 @@
-h1,
-h2,
-h3,
-p {
+* {
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
+	list-style: none;
+	outline: none;
+	font-optical-sizing: auto;
+	font-size: inherit;
+	background: none;
+	color: inherit;
+	border: none;
+	outline: transparent;
+	font-family: var(--font-geist-sans), serif;
+
+}
+
+input {
+	min-width: 0;
+	width: auto;
+}
+
+body {
+	overscroll-behavior: none;
+}
+
+p {
+	font-family: "Spectral", serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+button {
+	cursor: pointer;
 }
