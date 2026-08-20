@@ -1,7 +1,7 @@
 # Deskly: Sistema de manejo de tickets
 
 ## Pasos de arranque
-Al no usar secretos ni datos sensibles, se puede clonar directamente los .env.example a archivos .env.local, por lo que solo es necesario correr los comandos de las instrucciones:
+Al no usar secretos ni datos sensibles, se puede clonar directamente los .env.example a archivos .env.local, solo es necesario generar copiar tal cual el .env.example dentro del directorio de frontend/ a un nuevo archivo .env (igual dentro del directorio de frontend/), y luego, desde el root del repositorio, correr los comandos de las instrucciones:
 
 ```
 git clone https://github.com/ValenteAlvarez/deskly.git &&
